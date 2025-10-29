@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
-import 'package:smooth_chucker/smooth_chucker.dart';
 import 'package:my_cmh_updated/config/app_config.dart';
 import 'package:my_cmh_updated/model-new/app_version_response_model.dart';
 import 'package:my_cmh_updated/model-new/login_request.dart';
@@ -22,7 +22,7 @@ class AuthNetworkService {
       receiveTimeout: const Duration(seconds: 60),
       headers: {'Content-Type': 'application/json'},
     ),
-  )..interceptors.add(SmoothChuckerDioInterceptor());
+  )..interceptors.add(ChuckerDioInterceptor());
 
   String? url;
 

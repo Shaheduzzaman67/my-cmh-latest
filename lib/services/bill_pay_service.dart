@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
-import 'package:smooth_chucker/smooth_chucker.dart';
 import 'package:my_cmh_updated/config/app_config.dart';
 import 'package:my_cmh_updated/model-new/global_submit_response.dart';
 import 'package:my_cmh_updated/model-new/pay_bill/admission_bill_request.dart';
@@ -19,7 +19,7 @@ class PayBillNetworkService {
       receiveTimeout: const Duration(seconds: 160),
       headers: {'Content-Type': 'application/json'},
     ),
-  )..interceptors.add(SmoothChuckerDioInterceptor());
+  )..interceptors.add(ChuckerDioInterceptor());
 
   String? url;
   static final String baseUrl = AppConfig.apiUrl;

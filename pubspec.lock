@@ -93,10 +93,19 @@ packages:
     dependency: transitive
     description:
       name: chopper
-      sha256: "1b6280ec22841b844448bec8ef2644d9cbe9ea8dfce13ec9cab9e8d3aac3830d"
+      sha256: fb6106cd29553e34c811874efd8e8ee051ad7b9546e0d8c79394d2b6c9621b45
       url: "https://pub.dev"
     source: hosted
-    version: "7.4.0"
+    version: "8.4.0"
+  chucker_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: a2cba864a4ef81fdd4ef66b55eeaa84d1211ca18
+      url: "https://github.com/Shaheduzzaman67/chucker-flutter"
+    source: git
+    version: "1.8.5"
   cli_util:
     dependency: transitive
     description:
@@ -286,14 +295,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
-  flutter_json_viewer:
-    dependency: transitive
-    description:
-      name: flutter_json_viewer
-      sha256: "3acc20693c3e6465ff2e2a7884269e362cb8acc2b11e7caa9b283872f854e7bf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   flutter_launcher_icons:
     dependency: "direct main"
     description:
@@ -501,14 +502,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   nm:
     dependency: transitive
     description:
@@ -709,14 +702,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.3"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.5+1"
   qr:
     dependency: transitive
     description:
@@ -745,18 +730,18 @@ packages:
     dependency: "direct main"
     description:
       name: share_plus
-      sha256: fce43200aa03ea87b91ce4c3ac79f0cecd52e2a7a56c7a4185023c271fbfa6da
+      sha256: "14c8860d4de93d3a7e53af51bff479598c4e999605290756bbbe45cf65b37840"
       url: "https://pub.dev"
     source: hosted
-    version: "10.1.4"
+    version: "12.0.1"
   share_plus_platform_interface:
     dependency: transitive
     description:
       name: share_plus_platform_interface
-      sha256: cc012a23fc2d479854e6c80150696c4a5f5bb62cb89af4de1c505cf78d0a5d0b
+      sha256: "88023e53a13429bd65d8e85e11a9b484f49d4c190abbd96c7932b74d6927cc9a"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "6.1.0"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -834,14 +819,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  smooth_chucker:
-    dependency: "direct main"
-    description:
-      name: smooth_chucker
-      sha256: "507dbc81ff006669f0e0d9ff45cea6c2a0a55a881dec73fc434dde49bb1d3c0a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   source_span:
     dependency: transitive
     description:
@@ -882,14 +859,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.6"
-  sqflite_common_ffi:
-    dependency: transitive
-    description:
-      name: sqflite_common_ffi
-      sha256: "9faa2fedc5385ef238ce772589f7718c24cdddd27419b609bb9c6f703ea27988"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.6"
   sqflite_darwin:
     dependency: transitive
     description:
@@ -906,14 +875,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  sqlite3:
-    dependency: transitive
-    description:
-      name: sqlite3
-      sha256: f18fd9a72d7a1ad2920db61368f2a69368f1cc9b56b8233e9d83b47b0a8435aa
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.9.3"
   stack_trace:
     dependency: transitive
     description:

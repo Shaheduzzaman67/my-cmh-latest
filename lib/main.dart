@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,7 +21,6 @@ import 'package:my_cmh_updated/utils/app_info_utils.dart';
 import 'package:my_cmh_updated/utils/surjopay_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shurjopay/utilities/functions.dart';
-import 'package:smooth_chucker/smooth_chucker.dart';
 
 import 'ui/dashboard/health_records_screen.dart';
 import 'localize/localization_service.dart';
@@ -40,7 +40,7 @@ Future<void> main() async {
 
   _initializePaymentService();
   // Smooth Chucker is configured in each service class with SmoothChuckerDioInterceptor
-  SmoothChucker.showOnRelease = true;
+  ChuckerFlutter.showOnRelease = true;
   AppConfig.setEnvironment(Environment.production);
   AppConfig.printEnvironmentInfo();
   await AppInfoUtil.init();
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: LocalizationService.locales,
-      navigatorObservers: [SmoothChucker.navigatorObserver],
+      navigatorObservers: [ChuckerFlutter.navigatorObserver],
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
