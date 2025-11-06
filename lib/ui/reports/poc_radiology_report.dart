@@ -40,16 +40,12 @@ class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
 
       // Make API call
       final url = Uri.parse(
-          'https://cmhmobappapi.tilbd.net/api/v1/emr-radiology-report');
+        'https://cmhmobappapi.tilbd.net/api/v1/emr-radiology-report',
+      );
 
       final response = await http.post(
         url,
-        headers: {
-          'Accept': '*/*',
-          'Content-Type': 'application/json',
-          // Add your authentication headers if needed
-          // 'Authorization': 'Bearer YOUR_TOKEN',
-        },
+        headers: {'Accept': '*/*', 'Content-Type': 'application/json'},
         body: jsonEncode({
           'invoiceNo': widget.invoiceNo,
           'itemNo': widget.itemNo,
@@ -127,48 +123,47 @@ class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
               ),
             )
           : errorMessage != null
-              ? Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.error_outline,
-                          size: 64,
-                          color: Colors.red,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          errorMessage!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton(
-                          onPressed: fetchPdf,
-                          child: const Text('Retry'),
-                        ),
-                      ],
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64,
+                      color: Colors.red,
                     ),
-                  ),
-                )
-              : pdfBytes != null
-                  ? SfPdfViewer.memory(
-                      Uint8List.fromList(pdfBytes!),
-                      controller: _pdfViewerController,
-                      canShowScrollHead: true,
-                      canShowScrollStatus: true,
-                      enableDoubleTapZooming: true,
-                      enableTextSelection: true,
-                      onDocumentLoadFailed:
-                          (PdfDocumentLoadFailedDetails details) {
-                        setState(() {
-                          errorMessage = 'Failed to load PDF: ${details.error}';
-                        });
-                      },
-                    )
-                  : const Center(child: Text('No PDF available')),
+                    const SizedBox(height: 16),
+                    Text(
+                      errorMessage!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: fetchPdf,
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : pdfBytes != null
+          ? SfPdfViewer.memory(
+              Uint8List.fromList(pdfBytes!),
+              controller: _pdfViewerController,
+              canShowScrollHead: true,
+              canShowScrollStatus: true,
+              enableDoubleTapZooming: true,
+              enableTextSelection: true,
+              onDocumentLoadFailed: (PdfDocumentLoadFailedDetails details) {
+                setState(() {
+                  errorMessage = 'Failed to load PDF: ${details.error}';
+                });
+              },
+            )
+          : const Center(child: Text('No PDF available')),
     );
   }
 }

@@ -38,8 +38,8 @@ class Session {
     var tk = prefs.getString(SharedPreferenceKeys.userId) ?? "";
     print("🍎 userId from box! $tk");
     StringPreferenceKeys.userId = tk;
-    return AppConfig.isProduction ? tk : 'BD-000000';
-    //return 'BA-2502';
+    //return AppConfig.isProduction ? tk : 'BD-000000';
+    return '2008545';
   }
 
   saveUserId(String userId) async {

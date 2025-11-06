@@ -742,11 +742,22 @@ class _ReportsScreenState extends State<ReportsScreen>
                                 Spacer(),
                                 ElevatedButton.icon(
                                   onPressed: () {
-                                    getRadiologyReport(
-                                      item.invoiceNo.toString(),
-                                      item.itemNo.toString(),
-                                      item.itemName!,
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            RadiologyReportViewer(
+                                              invoiceNo: item.invoiceNo
+                                                  .toString(),
+                                              itemNo: item.itemNo.toString(),
+                                            ),
+                                      ),
                                     );
+                                    // getRadiologyReport(
+                                    //   item.invoiceNo.toString(),
+                                    //   item.itemNo.toString(),
+                                    //   item.itemName!,
+                                    // );
                                   },
                                   icon: Icon(
                                     Icons.save_alt_rounded,

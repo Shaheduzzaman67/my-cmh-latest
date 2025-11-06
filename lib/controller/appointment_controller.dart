@@ -339,6 +339,8 @@ class AppointmentController extends GetxController {
     try {
       final result = await _networkHelper.createAppointment(req);
 
+      print(result.toJson());
+
       if (result.success == true) {
         await Session.shared.clearSlotDate();
         await Workmanager().cancelByUniqueName(RELEASE_TASK_NAME);
