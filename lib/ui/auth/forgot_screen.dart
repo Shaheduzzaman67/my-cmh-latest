@@ -22,7 +22,6 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
   var authController = GetControllers.shared.getAuthController();
   var username = '';
   var dob = '';
-  var mobileNumber = '';
 
   DateFormat dobFormat = DateFormat("MM/dd/yyyy");
   DateFormat dobFormatServer = DateFormat("yyyy-MM-dd");
@@ -165,22 +164,7 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                                 ),
                               ),
                             ),
-                            EditTextWidgetWithoutCard(
-                              hintText: 'mobile_number_example'.tr,
-                              labelText: 'mobile_number'.tr,
-                              iconData: Icons.send_to_mobile,
-                              inputType: TextInputType.text,
-                              marginBottom: 5,
-                              marginTop: 5,
-                              onTextChange: (String text) {
-                                print(text);
-                                setState(() {});
-                                mobileNumber = text;
-                              },
-                              onDonePressed: (String value) {
-                                print(value);
-                              },
-                            ),
+
                             SizedBox(height: 40.0),
                             MaterialIconButton(
                               mColor: colorAccent,
@@ -201,15 +185,13 @@ class _ForgotPassScreenState extends State<ForgotPassScreen> {
                               ),
                               onClicked: () async {
                                 FocusScope.of(context).unfocus();
-                                if (username != '' &&
-                                    mobileNumber != '' &&
-                                    dob != '') {
+                                if (username != '' && dob != '') {
                                   authController.forgotPass(
                                     StringUtil.transformUsername(
                                       username.toUpperCase(),
                                     ),
                                     dob,
-                                    mobileNumber,
+
                                     callBack: () {
                                       Get.to(
                                         () => ForgetPinCodeVerificationScreen(

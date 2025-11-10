@@ -123,8 +123,7 @@ class AuthController extends GetxController {
 
   Future<void> forgotPass(
     String username,
-    String dob,
-    String mobileNumber, {
+    String dob, {
     required VoidCallback callBack,
   }) async {
     isLoading.value = true;
@@ -132,7 +131,6 @@ class AuthController extends GetxController {
     ForgotPassReq req = ForgotPassReq();
     req.personalId = StringUtil.transformUsername(username.toUpperCase());
     req.dob = dob;
-    req.mobile = mobileNumber;
 
     try {
       PasswordChangeResponse result = await _networkHelper.forgotPasswordNew(
