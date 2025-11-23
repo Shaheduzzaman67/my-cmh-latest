@@ -206,20 +206,46 @@ class AuthController extends GetxController {
       if (result.success != null && result.success == true) {
         appVersionInfo.value = result.versions!;
         final appVersion = AppInfoUtil.version;
-        if (appVersion != result.versions?.version) {
-          DialogService.appUpdaterDialog(
-            title: 'update_title'.tr,
-            content: result.versions?.changelog?.join('\n') ?? '',
-            buttonText: 'update_now'.tr,
-            onButtonPressed: () {
-              _launchURL();
-            },
-            isDismissible: result.versions?.mandatoryUpdate == false,
-          );
+        String? remoteVersion = appVersionInfo.value.version;
+        if (remoteVersion != null) {
+          int currentVersionNum = _convertVersionToNumber(appVersion);
+          int remoteVersionNum = _convertVersionToNumber(remoteVersion);
+
+          if (currentVersionNum < remoteVersionNum) {
+            DialogService.appUpdaterDialog(
+              title: 'update_title'.tr,
+              content: result.versions?.changelog?.join('\n') ?? '',
+              buttonText: 'update_now'.tr,
+              onButtonPressed: () {
+                _launchURL();
+              },
+              isDismissible: result.versions?.mandatoryUpdate == false,
+            );
+          }
         }
       }
     } catch (e) {
       debugPrint('Error fetching app version: $e');
+    }
+  }
+
+  int _convertVersionToNumber(String version) {
+    try {
+      List<String> parts = version.split('.');
+      if (parts.length >= 3) {
+        // Take first 3 parts and pad with zeros
+        int major = int.tryParse(parts[0]) ?? 0;
+        int minor = int.tryParse(parts[1]) ?? 0;
+        int patch = int.tryParse(parts[2]) ?? 0;
+
+        // Ensure each part is single digit or handle larger numbers
+        // For versions like 5.0.5 -> 505
+        return (major * 100) + (minor * 10) + patch;
+      }
+      return 0;
+    } catch (e) {
+      print('Error converting version: $e');
+      return 0;
     }
   }
 }
