@@ -230,22 +230,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              // _buildActionButton(
-              //   'password_change'.tr,
-              //   Icons.password,
-              //   Colors.white,
-              //   backgroundColor: colorPrimary,
-              //   onTap: () => authController.forgotPass(
-              //     appointmentController.careOfPaientInfo.value.personalNumber
-              //         .toString(),  appointmentController.careOfPaientInfo.value.,
-              //     callBack: () =>
-              //         Get.to(() => ChangePassPinCodeVerificationScreen(
-              //               appointmentController
-              //                   .careOfPaientInfo.value.personalNumber
-              //                   .toString(),
-              //             )),
-              //   ),
-              // ),
+              _buildActionButton(
+                'password_change'.tr,
+                Icons.password,
+                Colors.white,
+                backgroundColor: colorPrimary,
+                onTap: () => authController.forgotPass(
+                  appointmentController.careOfPaientInfo.value.personalNumber
+                      .toString(),
+                  appointmentController.careOfPaientInfo.value.dob ?? '',
+                  callBack: () => Get.to(
+                    () => ChangePassPinCodeVerificationScreen(
+                      appointmentController
+                          .careOfPaientInfo
+                          .value
+                          .personalNumber
+                          .toString(),
+                    ),
+                  ),
+                ),
+              ),
               _buildActionButton(
                 'how_to_use'.tr,
                 Icons.info,
