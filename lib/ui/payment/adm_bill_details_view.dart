@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_cmh_updated/common/constants.dart';
@@ -39,59 +37,6 @@ class _AdmBillDetailsViewState extends State<AdmBillDetailsView> {
       );
     }
   }
-
-  //String selectedPaymentOption = 'full'; // 'full' or 'custom'
-  //TextEditingController amountController = TextEditingController();
-
-  // ShurjoPay shurjoPay = ShurjoPay();
-
-  // ShurjopayConfigs shurjopayConfigs = ShurjopayConfigs(
-  //   prefix: "NOK",
-  //   userName: "sp_sandbox",
-  //   password: "pyyk97hu&6u6",
-  //   clientIP: "127.0.0.1",
-  // );
-
-  // ShurjopayResponseModel shurjopayResponseModel = ShurjopayResponseModel();
-
-  // ShurjopayVerificationModel shurjopayVerificationModel =
-  //     ShurjopayVerificationModel();
-
-  // Future<void> _handlePayment(dynamic opdList) async {
-  //   ShurjopayRequestModel shurjopayRequestModel = ShurjopayRequestModel(
-  //     configs: shurjopayConfigs,
-  //     currency: "BDT",
-  //     amount: double.parse('100'),
-  //     orderID: "sp1ab2c3d4",
-  //     customerName: "Shishir",
-  //     customerPhoneNumber: "01711486915",
-  //     customerAddress: "DHAKA",
-  //     customerCity: "Dhaka",
-  //     customerPostcode: "",
-  //     returnURL: "https://www.sandbox.shurjopayment.com/return_url",
-  //     cancelURL: "https://www.sandbox.shurjopayment.com/cancel_url",
-  //   );
-
-  //   shurjopayResponseModel = await shurjoPay.makePayment(
-  //     context: context,
-  //     shurjopayRequestModel: shurjopayRequestModel,
-  //   );
-
-  //   if (shurjopayResponseModel.status == true) {
-  //     try {
-  //       shurjopayVerificationModel = await shurjoPay.verifyPayment(
-  //         orderID: shurjopayResponseModel.shurjopayOrderID!,
-  //       );
-  //       print(shurjopayVerificationModel.spCode);
-  //       print(shurjopayVerificationModel.spMessage);
-  //       if (shurjopayVerificationModel.spCode == "1000") {
-  //         print("Payment Verified");
-  //       }
-  //     } catch (error) {
-  //       print(error.toString());
-  //     }
-  //   }
-  // }
 
   // Handle payment with the global service
   Future<void> _handlePayment({
@@ -158,31 +103,10 @@ class _AdmBillDetailsViewState extends State<AdmBillDetailsView> {
         currency: "BDT",
       );
 
-      // Print paymentRequest data
-      print('PaymentRequest Data:');
-      print('Amount: ${paymentRequest.amount}');
-      print('OrderID: ${paymentRequest.orderID}');
-      print('Customer Name: ${paymentRequest.customerName}');
-      print('Customer Phone Number: ${paymentRequest.customerPhoneNumber}');
-      print('Customer Address: ${paymentRequest.customerAddress}');
-      print('Customer City: ${paymentRequest.customerCity}');
-      print('Customer Postcode: ${paymentRequest.customerPostcode}');
-      print('Currency: ${paymentRequest.currency}');
-
       // Make payment using global service
       final result = await ShurjoPayService.instance.makePayment(
         context: context,
         paymentRequest: paymentRequest,
-      );
-      print('result');
-      print('isSuccess: ${result.isSuccess}');
-      print('message: ${result.message}');
-      print('orderID: ${result.orderID}');
-      print('spCode: ${result.spCode}');
-      print('spMessage: ${result.spMessage}');
-      print('responseModel.status: ${result.responseModel?.status}');
-      print(
-        'responseModel.shurjopayOrderID: ${result.responseModel?.shurjopayOrderID}',
       );
 
       // Handle payment result
@@ -226,14 +150,53 @@ class _AdmBillDetailsViewState extends State<AdmBillDetailsView> {
     }
   }
 
+  // Validate if phone number is a valid BD number
+  bool _isValidBDPhoneNumber(String? phoneNumber) {
+    if (phoneNumber == null || phoneNumber.isEmpty) {
+      return false;
+    }
+
+    // Remove any spaces, dashes, or special characters
+    String cleanedNumber = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
+
+    // BD phone numbers are 11 digits starting with 01
+    if (cleanedNumber.length == 11 && cleanedNumber.startsWith('01')) {
+      return true;
+    }
+
+    // Also accept numbers with country code +880 or 880
+    if (cleanedNumber.length == 13 && cleanedNumber.startsWith('880')) {
+      return true;
+    }
+
+    return false;
+  }
+
   void _showPaymentOptions(BuildContext context) async {
+    // Get patient phone number
+    final patientMobile = payBillController
+        .admissionSummery
+        .value
+        .model
+        ?.patientInfo
+        ?.phoneMobile;
+
+    // Validate phone number before proceeding
+    if (!_isValidBDPhoneNumber(patientMobile)) {
+      DialogService.showErrorDialog(
+        context,
+        'Invalid Mobile Number',
+        'Please update your mobile number with a valid Bangladesh phone number before making online payment.',
+      );
+      return;
+    }
+
     final result = await PaymentOptionsBottomSheet.show(
       context,
       fullAmount: payBillController.admissionBillSummery.value.dueAmt,
       currency: 'TK',
       onPaymentConfirmed: (paymentResult) async {
         // Handle the payment result from bottom sheet
-        print('Payment confirmed: ${paymentResult.paymentType}');
 
         double paymentAmount;
         if (paymentResult.paymentType == 'full') {

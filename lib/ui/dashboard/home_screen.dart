@@ -229,14 +229,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         //Spacer(),
                         SizedBox(width: 10),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, PayBillViews.id);
-                            },
-                            child: item(name: "pay_bill".tr, isNew: true),
-                          ),
-                        ),
+                        if (authController
+                                .appVersionInfo
+                                .value
+                                .isPayAvailable ==
+                            true)
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, PayBillViews.id);
+                              },
+                              child: item(name: "pay_bill".tr, isNew: true),
+                            ),
+                          )
+                        else
+                          Expanded(child: SizedBox()),
                       ],
                     ),
                   ],

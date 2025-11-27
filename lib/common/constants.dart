@@ -8,9 +8,6 @@ import 'package:material_dialogs/material_dialogs.dart';
 import 'package:material_dialogs/shared/types.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//const BASE_URL_DEV = "https://cmhmobappapi.tilbd.net/api/mock/";
-//const BASE_URL_DEV = "https://cmhmobappapi.tilbd.net/api/v1/";
-
 const APP_URL_BASE = 'https://milapps.itdte.net/';
 const APP_URL =
     'https://play.google.com/store/apps/details?id=com.army.itdte.mycmh_patient';
@@ -61,10 +58,7 @@ var PUSHER_APP_SECRET = '68142b011d0f04d15e81';
 
 //
 
-const cLabelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFFFFFFFF),
-);
+const cLabelTextStyle = TextStyle(fontSize: 18.0, color: Color(0xFFFFFFFF));
 
 Future<void> makePhoneCall(String url) async {
   if (await canLaunchUrl(Uri.parse(url))) {
@@ -74,159 +68,219 @@ Future<void> makePhoneCall(String url) async {
   }
 }
 
-Future<void> buildAlertDialogWithChildren(BuildContext context,
-    bool isFullScreen, String _alertTitle, String _alertText) {
+Future<void> buildAlertDialogWithChildren(
+  BuildContext context,
+  bool isFullScreen,
+  String _alertTitle,
+  String _alertText,
+) {
   return Dialogs.materialDialog(
-      msg: '${_alertText}',
-      title: "${_alertTitle}",
-      msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
-      titleStyle: GoogleFonts.lato(
-          color: colorPrimary, fontSize: 20, fontWeight: FontWeight.bold),
-      barrierDismissible: true,
-      color: Colors.white,
-      context: context,
-      actions: [
-        TextButton(
-          child: Text(
-            'ok'.tr,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 14.0, color: Theme.of(context).primaryColor),
+    msg: '${_alertText}',
+    title: "${_alertTitle}",
+    msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
+    titleStyle: GoogleFonts.lato(
+      color: colorPrimary,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    barrierDismissible: true,
+    color: Colors.white,
+    context: context,
+    actions: [
+      TextButton(
+        child: Text(
+          'ok'.tr,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 14.0,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
-      ]);
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ],
+  );
 }
 
 Future<void> buildAlertDialogWithChildrenWithFunction(
-    BuildContext context,
-    bool isFullScreen,
-    String _alertTitle,
-    String _alertText,
-    VoidCallback onOk) {
+  BuildContext context,
+  bool isFullScreen,
+  String _alertTitle,
+  String _alertText,
+  VoidCallback onOk,
+) {
   return Dialogs.materialDialog(
-      msg: '${_alertText}',
-      title: "${_alertTitle}",
-      msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
-      titleStyle: GoogleFonts.lato(
-          color: colorPrimary, fontSize: 20, fontWeight: FontWeight.bold),
-      barrierDismissible: true,
-      color: Colors.white,
-      context: context,
-      actions: [
-        TextButton(
-          child: Text(
-            'ok'.tr,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 14.0, color: Theme.of(context).primaryColor),
+    msg: '${_alertText}',
+    title: "${_alertTitle}",
+    msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
+    titleStyle: GoogleFonts.lato(
+      color: colorPrimary,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    barrierDismissible: true,
+    color: Colors.white,
+    context: context,
+    actions: [
+      TextButton(
+        child: Text(
+          'ok'.tr,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 14.0,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: () {
-            onOk();
-          },
         ),
-      ]);
-}
-
-Future<void> buildAlertDialogForAppointment(BuildContext context,
-    bool isFullScreen, String _alertTitle, String _alertText,
-    {String? departmentName, String? roomName, VoidCallback? onPressed}) {
-  return Dialogs.materialDialog(
-      msg: '${_alertText}',
-      title: "${_alertTitle}",
-      msgStyle: GoogleFonts.lato(
-          color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-      titleStyle: GoogleFonts.lato(
-          color: colorPrimary, fontSize: 20, fontWeight: FontWeight.bold),
-      msgAlign: TextAlign.center,
-      barrierDismissible: true,
-      color: Colors.white,
-      customViewPosition: CustomViewPosition.BEFORE_ACTION,
-      customView: Column(
-        children: [
-          Text(
-            departmentName ?? '',
-            style: GoogleFonts.lato(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            roomName ?? '',
-            style: GoogleFonts.lato(
-                color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ],
+        onPressed: () {
+          onOk();
+        },
       ),
-      context: context,
-      actions: [
-        TextButton(
-          child: Text(
-            'ok'.tr,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 25.0,
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-            onPressed?.call();
-          },
-        ),
-      ]);
+    ],
+  );
 }
 
-Future<void> buildAlertDialogForAppointmentError(BuildContext context,
-    bool isFullScreen, String _alertTitle, String _alertText) {
+Future<void> buildAlertDialogForAppointment(
+  BuildContext context,
+  bool isFullScreen,
+  String _alertTitle,
+  String _alertText, {
+  String? departmentName,
+  String? roomName,
+  VoidCallback? onPressed,
+}) {
   return Dialogs.materialDialog(
-      msg: '${_alertText}',
-      title: "${_alertTitle}",
-      msgStyle: GoogleFonts.lato(
-          color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
-      titleStyle: GoogleFonts.lato(
-          color: colorPrimary, fontSize: 20, fontWeight: FontWeight.bold),
-      barrierDismissible: true,
-      color: Colors.white,
-      context: context,
-      actions: [
-        TextButton(
-          child: Text(
-            'ok'.tr,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 14.0, color: Theme.of(context).primaryColor),
+    msg: '${_alertText}',
+    title: "${_alertTitle}",
+    msgStyle: GoogleFonts.lato(
+      color: Colors.black,
+      fontSize: 25,
+      fontWeight: FontWeight.bold,
+    ),
+    titleStyle: GoogleFonts.lato(
+      color: colorPrimary,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    msgAlign: TextAlign.center,
+    barrierDismissible: true,
+    color: Colors.white,
+    customViewPosition: CustomViewPosition.BEFORE_ACTION,
+    customView: Column(
+      children: [
+        Text(
+          departmentName ?? '',
+          style: GoogleFonts.lato(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
-      ]);
+        Text(
+          roomName ?? '',
+          style: GoogleFonts.lato(
+            color: Colors.black,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+    context: context,
+    actions: [
+      TextButton(
+        child: Text(
+          'ok'.tr,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 25.0,
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+          onPressed?.call();
+        },
+      ),
+    ],
+  );
 }
 
-Future<void> buildExitAlertDialogWithChildren(BuildContext context,
-    bool isFullScreen, String _alertTitle, String _alertText) {
+Future<void> buildAlertDialogForAppointmentError(
+  BuildContext context,
+  bool isFullScreen,
+  String _alertTitle,
+  String _alertText,
+) {
   return Dialogs.materialDialog(
-      msg: '${_alertText}',
-      title: "${_alertTitle}",
-      msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
-      titleStyle: GoogleFonts.lato(
-          color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
-      barrierDismissible: true,
-      color: Colors.white,
-      context: context,
-      actions: [
-        TextButton(
-          child: Text(
-            'ok'.tr,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 14.0, color: Theme.of(context).primaryColor),
+    msg: '${_alertText}',
+    title: "${_alertTitle}",
+    msgStyle: GoogleFonts.lato(
+      color: Colors.black,
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+    ),
+    titleStyle: GoogleFonts.lato(
+      color: colorPrimary,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    barrierDismissible: true,
+    color: Colors.white,
+    context: context,
+    actions: [
+      TextButton(
+        child: Text(
+          'ok'.tr,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 14.0,
+            color: Theme.of(context).primaryColor,
           ),
-          onPressed: () {
-            if (Platform.isAndroid) {
-              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-            } else if (Platform.isIOS) {
-              exit(0);
-            }
-          },
         ),
-      ]);
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ],
+  );
+}
+
+Future<void> buildExitAlertDialogWithChildren(
+  BuildContext context,
+  bool isFullScreen,
+  String _alertTitle,
+  String _alertText,
+) {
+  return Dialogs.materialDialog(
+    msg: '${_alertText}',
+    title: "${_alertTitle}",
+    msgStyle: GoogleFonts.lato(color: Colors.black, fontSize: 14),
+    titleStyle: GoogleFonts.lato(
+      color: Colors.red,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+    barrierDismissible: true,
+    color: Colors.white,
+    context: context,
+    actions: [
+      TextButton(
+        child: Text(
+          'ok'.tr,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 14.0,
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
+        onPressed: () {
+          if (Platform.isAndroid) {
+            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          } else if (Platform.isIOS) {
+            exit(0);
+          }
+        },
+      ),
+    ],
+  );
 }
 
 void showSupportDialog(BuildContext context) {
@@ -253,18 +307,21 @@ void showSupportDialog(BuildContext context) {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('CMH IT Center (01769015949)',
-                    style: TextStyle(
-                      fontFamily: FONT_NAME2,
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    )),
+                Text(
+                  'CMH IT Center (01769015949)',
+                  style: TextStyle(
+                    fontFamily: FONT_NAME2,
+                    fontSize: 15.0,
+                    color: Colors.black,
+                  ),
+                ),
                 IconButton(
                   icon: Icon(Icons.call),
                   onPressed: () {
                     Navigator.pop(context);
                     makePhoneCall(
-                        'tel: 01769015949'); // Launches the dialer with the given number
+                      'tel: 01769015949',
+                    ); // Launches the dialer with the given number
                   },
                 ),
               ],
@@ -299,16 +356,18 @@ void showSupportDialog(BuildContext context) {
 
 void showColoredToast(String msg) {
   Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_LONG,
-      backgroundColor: Colors.black54,
-      textColor: Colors.white);
+    msg: msg,
+    toastLength: Toast.LENGTH_LONG,
+    backgroundColor: Colors.black54,
+    textColor: Colors.white,
+  );
 }
 
 void showWhiteToast(String msg) {
   Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_LONG,
-      backgroundColor: Colors.white,
-      textColor: Colors.black);
+    msg: msg,
+    toastLength: Toast.LENGTH_LONG,
+    backgroundColor: Colors.white,
+    textColor: Colors.black,
+  );
 }

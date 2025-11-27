@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen>
 
   @override
   void initState() {
-    //getAppUpdate();
+    getAppUpdate();
     super.initState();
   }
 
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 children: [
                                   GestureDetector(
                                     child: Text(
-                                      'register_account'.tr,
+                                      'Support'.tr,
                                       style: TextStyle(
                                         color: colorPrimary,
                                         fontFamily: FONT_NAME2,
@@ -241,13 +241,9 @@ class _LoginScreenState extends State<LoginScreen>
                                       ),
                                     ),
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              RegistrationScreen(),
-                                        ),
-                                      );
+                                      FocusScope.of(context).unfocus();
+
+                                      showSupportDialog(context);
                                     },
                                   ),
                                   GestureDetector(
@@ -313,7 +309,7 @@ class _LoginScreenState extends State<LoginScreen>
                               circle: 8.0,
                               mChild: Container(
                                 child: Text(
-                                  'Support'.tr,
+                                  'register_account'.tr,
                                   style: GoogleFonts.nunitoSans(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -323,9 +319,12 @@ class _LoginScreenState extends State<LoginScreen>
                                 ),
                               ),
                               onClicked: () async {
-                                FocusScope.of(context).unfocus();
-
-                                showSupportDialog(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegistrationScreen(),
+                                  ),
+                                );
                               },
                             ),
                           ],

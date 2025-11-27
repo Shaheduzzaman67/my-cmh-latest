@@ -48,7 +48,7 @@ class _DashBoardScreenState extends State<DashBoardScreen>
   @override
   void initState() {
     releaseTimeSlot();
-    //getAppUpdate();
+    getAppUpdate();
     super.initState();
   }
 

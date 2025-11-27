@@ -40,8 +40,8 @@ Future<void> main() async {
 
   _initializePaymentService();
   // Smooth Chucker is configured in each service class with SmoothChuckerDioInterceptor
-  ChuckerFlutter.showOnRelease = true;
-  AppConfig.setEnvironment(Environment.production);
+  ChuckerFlutter.showOnRelease = false;
+  AppConfig.setEnvironment(Environment.development);
   AppConfig.printEnvironmentInfo();
   await AppInfoUtil.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);

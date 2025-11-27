@@ -1,8 +1,5 @@
 // app_config.dart
-enum Environment {
-  development,
-  production,
-}
+enum Environment { development, production }
 
 class AppConfig {
   static Environment _environment = Environment.development;
@@ -20,9 +17,9 @@ class AppConfig {
   static String get apiUrl {
     switch (_environment) {
       case Environment.development:
-        return 'https://cmhmobappapi.tilbd.net/api/mock/';
+        return const String.fromEnvironment("API_URL_MOCK");
       case Environment.production:
-        return 'https://cmhmobappapi.tilbd.net/api/v1/';
+        return const String.fromEnvironment("API_URL_PROD");
     }
   }
 
@@ -37,10 +34,10 @@ class AppConfig {
   }
 
   // Enable/disable logging
-  static bool get enableLogging => isProduction;
+  static bool get enableLogging => !isProduction;
 
   // Enable/disable debug features
-  static bool get enableDebugFeatures => isProduction;
+  static bool get enableDebugFeatures => !isProduction;
 
   static String get deviceId {
     if (isProduction) {

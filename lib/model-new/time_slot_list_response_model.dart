@@ -5,11 +5,7 @@ class TimeSlotListResponseModel {
 
   List<TimeSlotList>? timeSlotList;
 
-  TimeSlotListResponseModel({
-    this.success,
-    this.message,
-    this.timeSlotList,
-  });
+  TimeSlotListResponseModel({this.success, this.message, this.timeSlotList});
 
   factory TimeSlotListResponseModel.fromJson(Map<String, dynamic> json) =>
       TimeSlotListResponseModel(
@@ -18,16 +14,17 @@ class TimeSlotListResponseModel {
         timeSlotList: json["items"] == null
             ? []
             : List<TimeSlotList>.from(
-                json["items"]!.map((x) => TimeSlotList.fromJson(x))),
+                json["items"]!.map((x) => TimeSlotList.fromJson(x)),
+              ),
       );
 
   Map<String, dynamic> toJson() => {
-        "success": success,
-        "message": message,
-        "items": timeSlotList == null
-            ? []
-            : List<dynamic>.from(timeSlotList!.map((x) => x.toJson())),
-      };
+    "success": success,
+    "message": message,
+    "items": timeSlotList == null
+        ? []
+        : List<dynamic>.from(timeSlotList!.map((x) => x.toJson())),
+  };
 }
 
 class TimeSlotList {
@@ -49,6 +46,8 @@ class TimeSlotList {
   int? shiftOrder;
   int? roomNo;
   String? description;
+  int? isOnline;
+  String? allocationName;
 
   TimeSlotList({
     this.slotNo,
@@ -64,37 +63,43 @@ class TimeSlotList {
     this.shiftOrder,
     this.roomNo,
     this.description,
+    this.isOnline,
+    this.allocationName,
   });
 
   factory TimeSlotList.fromJson(Map<String, dynamic> json) => TimeSlotList(
-        slotNo: json["slotNo"],
-        slotDate: json["slotDate"],
-        slotSl: json["slotSl"],
-        startTime: json["startTime"],
-        endTime: json["endTime"],
-        durationMin: json["durationMin"],
-        appointNo: json["appointNo"],
-        bookedBy: json["bookedBy"],
-        appointStatus: json["appointStatus"],
-        retainFlag: json["retainFlag"],
-        shiftOrder: json["shiftOrder"],
-        description: json["description"],
-        roomNo: json["roomNo"],
-      );
+    slotNo: json["slotNo"],
+    slotDate: json["slotDate"],
+    slotSl: json["slotSl"],
+    startTime: json["startTime"],
+    endTime: json["endTime"],
+    durationMin: json["durationMin"],
+    appointNo: json["appointNo"],
+    bookedBy: json["bookedBy"],
+    appointStatus: json["appointStatus"],
+    retainFlag: json["retainFlag"],
+    shiftOrder: json["shiftOrder"],
+    description: json["description"],
+    roomNo: json["roomNo"],
+    isOnline: json["isOnline"],
+    allocationName: json["allocationName"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "slotNo": slotNo,
-        "slotDate": slotDate,
-        "slotSl": slotSl,
-        "startTime": startTime,
-        "endTime": endTime,
-        "durationMin": durationMin,
-        "appointNo": appointNo,
-        "bookedBy": bookedBy,
-        "appointStatus": appointStatus,
-        "retainFlag": retainFlag,
-        "shiftOrder": shiftOrder,
-        "description": description,
-        "roomNo": roomNo,
-      };
+    "slotNo": slotNo,
+    "slotDate": slotDate,
+    "slotSl": slotSl,
+    "startTime": startTime,
+    "endTime": endTime,
+    "durationMin": durationMin,
+    "appointNo": appointNo,
+    "bookedBy": bookedBy,
+    "appointStatus": appointStatus,
+    "retainFlag": retainFlag,
+    "shiftOrder": shiftOrder,
+    "description": description,
+    "roomNo": roomNo,
+    "isOnline": isOnline,
+    "allocationName": allocationName,
+  };
 }

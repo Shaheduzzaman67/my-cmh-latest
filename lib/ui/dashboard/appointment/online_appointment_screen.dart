@@ -388,7 +388,7 @@ class _OnlineAppointmentScreenState extends State<OnlineAppointmentScreen>
                         controller.timeSlot.clear();
                         DateTime now = DateTime.now();
                         DateTime maxSelectableDate = now.add(
-                          Duration(days: 7),
+                          Duration(days: 2),
                         ); // Allow selection up to 72 hours
                         final pickedDate = await showDatePicker(
                           context: context,
