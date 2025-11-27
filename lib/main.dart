@@ -26,7 +26,8 @@ import 'ui/dashboard/health_records_screen.dart';
 import 'localize/localization_service.dart';
 
 Future<void> main() async {
-  initializeShurjopay(environment: "live");
+  //initializeShurjopay(environment: "live");
+  initializeShurjopay(environment: "sandbox");
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light.copyWith(
       statusBarColor: colorAccent,
@@ -75,14 +76,10 @@ Future<void> _initializePaymentService() async {
 
   // Initialize the service
   ShurjoPayService.instance.initialize(
-    environment:
-        PaymentEnvironment.production, // Change to production when ready
+    environment: PaymentEnvironment.sandbox, // Change to production when ready
     sandboxCredentials: sandboxCredentials,
     productionCredentials: productionCredentials,
   );
-
-  print("ShurjoPay Service Initialized");
-  print(ShurjoPayService.instance.environmentInfo);
 }
 
 class MyHomePage extends StatefulWidget {
@@ -115,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         : prefs.getString(SharedPreferenceKeys.language) == 'English'
         ? AppLabels.english
         : AppLabels.english;
-    print('language>>' + language);
+
     if (language == AppLabels.english) {
       Get.updateLocale(const Locale('en', 'US'));
     } else if (language == AppLabels.bangla) {

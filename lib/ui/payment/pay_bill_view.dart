@@ -444,7 +444,6 @@ class _PayBillScreenState extends State<PayBillScreen>
       currency: 'TK',
       onPaymentConfirmed: (paymentResult) async {
         // Handle the payment result from bottom sheet
-        print('Payment confirmed: ${paymentResult.paymentType}');
 
         double paymentAmount;
         if (paymentResult.paymentType == 'full') {
@@ -526,10 +525,7 @@ class _PayBillScreenState extends State<PayBillScreen>
       );
 
       // Handle payment result
-      print(result);
-      print(result.message);
-      print(result.orderID);
-      print(result.responseModel?.message);
+
       _handlePaymentResult(result, invoiceId, amount.toString());
     } catch (error) {
       DialogService.showErrorDialog(context, 'Payment Error', error.toString());

@@ -48,6 +48,7 @@ class TimeSlotList {
   String? description;
   int? isOnline;
   String? allocationName;
+  int? allocationType;
 
   TimeSlotList({
     this.slotNo,
@@ -65,6 +66,7 @@ class TimeSlotList {
     this.description,
     this.isOnline,
     this.allocationName,
+    this.allocationType,
   });
 
   factory TimeSlotList.fromJson(Map<String, dynamic> json) => TimeSlotList(
@@ -83,6 +85,7 @@ class TimeSlotList {
     roomNo: json["roomNo"],
     isOnline: json["isOnline"],
     allocationName: json["allocationName"],
+    allocationType: json["allocationType"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +104,6 @@ class TimeSlotList {
     "roomNo": roomNo,
     "isOnline": isOnline,
     "allocationName": allocationName,
+    "allocationType": allocationType,
   };
 }

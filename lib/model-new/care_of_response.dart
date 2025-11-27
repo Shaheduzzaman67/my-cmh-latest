@@ -47,14 +47,24 @@ class CareOfResponse {
 }
 
 class Obj {
-  Obj({this.patientInfo});
+  Obj({this.patientInfo, this.careOfpatientInfo});
 
   Info? patientInfo;
+  Info? careOfpatientInfo;
 
-  factory Obj.fromJson(Map<String, dynamic> json) =>
-      Obj(patientInfo: Info.fromJson(json["patientInfo"]));
+  factory Obj.fromJson(Map<String, dynamic> json) => Obj(
+    patientInfo: json["patientInfo"] != null
+        ? Info.fromJson(json["patientInfo"])
+        : null,
+    careOfpatientInfo: json["careOfInfo"] != null
+        ? Info.fromJson(json["careOfInfo"])
+        : null,
+  );
 
-  Map<String, dynamic> toJson() => {"patientInfo": patientInfo!.toJson()};
+  Map<String, dynamic> toJson() => {
+    "patientInfo": patientInfo?.toJson(),
+    "careOfInfo": careOfpatientInfo?.toJson(),
+  };
 }
 
 class Info {
@@ -342,3 +352,51 @@ class Info {
     "dob": dob,
   };
 }
+
+// class CareOfInfo {
+//   CareOfInfo({
+//     this.activeStatus,
+//     this.persNumbPrefix,
+//     this.persNumbPrefixName,
+//     this.eligibilityStatus,
+//     this.eligibilityStatusName,
+//     this.serviceCategory,
+//     this.serviceCategoryName,
+//     this.personCategory,
+//     this.personCategoryName,
+//   });
+
+//   int? activeStatus;
+//   int? persNumbPrefix;
+//   String? persNumbPrefixName;
+//   int? eligibilityStatus;
+//   dynamic eligibilityStatusName;
+//   int? serviceCategory;
+//   dynamic serviceCategoryName;
+//   int? personCategory;
+//   dynamic personCategoryName;
+
+//   factory CareOfInfo.fromJson(Map<String, dynamic> json) => CareOfInfo(
+//     activeStatus: json["activeStatus"],
+//     persNumbPrefix: json["persNumbPrefix"],
+//     persNumbPrefixName: json["persNumbPrefixName"],
+//     eligibilityStatus: json["eligibilityStatus"],
+//     eligibilityStatusName: json["eligibilityStatusName"],
+//     serviceCategory: json["serviceCategory"],
+//     serviceCategoryName: json["serviceCategoryName"],
+//     personCategory: json["personCategory"],
+//     personCategoryName: json["personCategoryName"],
+//   );
+
+//   Map<String, dynamic> toJson() => {
+//     "activeStatus": activeStatus,
+//     "persNumbPrefix": persNumbPrefix,
+//     "persNumbPrefixName": persNumbPrefixName,
+//     "eligibilityStatus": eligibilityStatus,
+//     "eligibilityStatusName": eligibilityStatusName,
+//     "serviceCategory": serviceCategory,
+//     "serviceCategoryName": serviceCategoryName,
+//     "personCategory": personCategory,
+//     "personCategoryName": personCategoryName,
+//   };
+// }

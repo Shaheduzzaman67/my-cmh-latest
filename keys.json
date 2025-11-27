@@ -1,0 +1,5 @@
+{
+    "API_URL_PROD": "https://cmhmobappapi.tilbd.net/api/v1/",
+    "API_URL_MOCK": "https://cmhmobappapi.tilbd.net/api/mock/",
+    "APP_URL": "https://play.google.com/store/apps/details?id=com.army.itdte.mycmh_patient"
+}

@@ -65,7 +65,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didUpdateWidget(SplashScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget");
   }
 
   @override

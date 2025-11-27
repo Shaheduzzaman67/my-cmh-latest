@@ -22,7 +22,6 @@ void callbackDispatcher() {
       }
       return Future.value(true);
     } catch (err) {
-      print('Background task error: $err');
       return Future.value(false);
     }
   });

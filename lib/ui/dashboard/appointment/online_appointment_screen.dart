@@ -399,7 +399,6 @@ class _OnlineAppointmentScreenState extends State<OnlineAppointmentScreen>
                         );
 
                         if (pickedDate != null) {
-                          print(pickedDate.weekday);
                           if (pickedDate.weekday == DateTime.saturday) {
                             setState(() {
                               isSaturday = true;
@@ -649,6 +648,24 @@ class _OnlineAppointmentScreenState extends State<OnlineAppointmentScreen>
                                               return;
                                             }
 
+                                            // Check if this is an Officers Reserved slot and user is eligible
+                                            bool isOfficersReserved =
+                                                item.allocationType != null &&
+                                                item.allocationName ==
+                                                    "Officers Reserved";
+
+                                            if (isOfficersReserved &&
+                                                !controller
+                                                    .isEligibleForOfficersReserved()) {
+                                              buildAlertDialogWithChildren(
+                                                context,
+                                                true,
+                                                'information'.tr,
+                                                'This slot is reserved for Officers only (Army/BAF/Navy personnel).',
+                                              );
+                                              return;
+                                            }
+
                                             var tempTimeSlot = await Session
                                                 .shared
                                                 .getSlotData();
@@ -739,7 +756,20 @@ class _OnlineAppointmentScreenState extends State<OnlineAppointmentScreen>
                                                               ? colorYellow
                                                               : colorAccent)),
                                               border: Border.all(
-                                                color: Color(0xffE2E2E2),
+                                                color:
+                                                    (item.allocationType !=
+                                                            null &&
+                                                        item.allocationName ==
+                                                            "Officers Reserved")
+                                                    ? Colors.orange
+                                                    : Color(0xffE2E2E2),
+                                                width:
+                                                    (item.allocationType !=
+                                                            null &&
+                                                        item.allocationName ==
+                                                            "Officers Reserved")
+                                                    ? 2.0
+                                                    : 1.0,
                                               ),
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(8),

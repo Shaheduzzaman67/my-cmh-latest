@@ -32,6 +32,8 @@ class AppointmentController extends GetxController {
   var departmentList = <DepartmentItem>[].obs;
   var careOfPaientInfo = careOf.Info().obs;
 
+  var verifyPaientInfo = careOf.Info().obs;
+
   var roomListData = <RoomList>[].obs;
   var timeSlot = <TimeSlotList>[].obs;
   var selectedPatient;
@@ -160,6 +162,10 @@ class AppointmentController extends GetxController {
 
       if (result.success == true) {
         careOfPaientInfo.value = result.obj?.patientInfo ?? careOf.Info();
+        verifyPaientInfo.value =
+            result.obj?.careOfpatientInfo ??
+            result.obj?.patientInfo ??
+            careOf.Info();
       } else {
         buildAlertDialogWithChildren(
           Get.context!,
@@ -339,8 +345,6 @@ class AppointmentController extends GetxController {
     try {
       final result = await _networkHelper.createAppointment(req);
 
-      print(result.toJson());
-
       if (result.success == true) {
         await Session.shared.clearSlotDate();
         await Workmanager().cancelByUniqueName(RELEASE_TASK_NAME);
@@ -391,13 +395,58 @@ class AppointmentController extends GetxController {
 
   var groupedTimeSlots = <String, List<TimeSlotList>>{}.obs;
 
+  // Check if user is eligible for Officers Reserved slots
+  bool isEligibleForOfficersReserved() {
+    final patientInfo = verifyPaientInfo.value;
+    final personalNum = selectedPatient?.personalNumber ?? '';
+
+    // Check if personCategoryName is "Officer"
+    bool isOfficer =
+        patientInfo.personCategoryName?.toString().toLowerCase() == "officer";
+
+    // Check if serviceCategoryName is Army, BAF, or Navy
+    String serviceCategory =
+        patientInfo.serviceCategoryName?.toString().toLowerCase() ?? '';
+
+    bool isValidService =
+        serviceCategory == "army" ||
+        serviceCategory == "baf" ||
+        serviceCategory == "navy";
+
+    // Exclude Miscellaneous and Batman using the same logic as the UI dropdown
+    bool isMiscellaneous =
+        personalNum.contains("MISC") || personalNum.contains("MS");
+
+    // Batman check - similar to the existing UI logic
+    bool isBatman = false;
+    if (personalNum.length >= 2) {
+      String lastTwoChars = personalNum.substring(personalNum.length - 2);
+      isBatman =
+          lastTwoChars.endsWith('B') &&
+          lastTwoChars[0].contains(RegExp(r'[0-9]'));
+    }
+
+    // Eligible if Officer + (Army/BAF/Navy) AND NOT (Miscellaneous OR Batman)
+    return isOfficer && isValidService && !isMiscellaneous && !isBatman;
+  }
+
   void groupFilteredTimeSlots() {
     var filteredSlots = getFilteredTimeSlots();
 
     Map<String, List<TimeSlotList>> tempGrouped = {};
 
     for (var slot in filteredSlots) {
-      String key = slot.description ?? 'Others';
+      String descriptionKey = slot.description ?? 'Others';
+
+      // Check if this slot is for Officers Reserved
+      bool isOfficersReserved =
+          slot.allocationType != null &&
+          slot.allocationName == "Officers Reserved";
+
+      // Create a combined key: description + allocation type
+      String key = isOfficersReserved
+          ? '$descriptionKey - Officers Reserved'
+          : descriptionKey;
 
       if (tempGrouped.containsKey(key)) {
         tempGrouped[key]!.add(slot);
@@ -450,7 +499,6 @@ class AppointmentController extends GetxController {
           // Compare with current time
           return startTime.isAfter(now);
         } catch (e) {
-          print("Error parsing date: ${e.toString()}");
           return true; // Include the slot if there's a parsing error
         }
       }).toList(); // Explicitly cast back to List<TimeSlotList>
@@ -475,8 +523,6 @@ class AppointmentController extends GetxController {
     Map<String, dynamic> activeDays = StringUtil.parseBusinessSchedule(
       selectedDepartment.businessSchedule ?? '{}',
     );
-
-    print(activeDays);
 
     bool isDayAvailable = false;
     if (activeDays[selectedDay] is bool) {

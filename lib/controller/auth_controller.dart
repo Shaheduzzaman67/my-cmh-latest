@@ -224,9 +224,7 @@ class AuthController extends GetxController {
           }
         }
       }
-    } catch (e) {
-      debugPrint('Error fetching app version: $e');
-    }
+    } catch (e) {}
   }
 
   int _convertVersionToNumber(String version) {
@@ -244,7 +242,6 @@ class AuthController extends GetxController {
       }
       return 0;
     } catch (e) {
-      print('Error converting version: $e');
       return 0;
     }
   }

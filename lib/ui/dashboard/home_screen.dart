@@ -88,32 +88,31 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               !(authController.isDataLoaded.value)
                   ? ShimmerLineItem()
-                  : ListTile(
-                      dense: true,
-                      leading: Container(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        child: Row(
-                          children: [
-                            Image(
-                              image: AssetImage('images/user2.png'),
-                              height: 40,
-                            ),
-                            SizedBox(width: 5),
-                            SizedBox(
-                              width: 260,
-                              child: Text(
-                                '${authController.patientName[0].patientName ?? ''}',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                  fontFamily: FONT_NAME,
-                                ),
+                  : Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Image(
+                            image: AssetImage('images/user2.png'),
+                            height: 40,
+                          ),
+                          SizedBox(width: 5),
+                          Expanded(
+                            child: Text(
+                              '${authController.patientName[0].patientName ?? ''}',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.black,
+                                fontFamily: FONT_NAME,
                               ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+
               Container(
                 margin: EdgeInsets.only(top: 10, bottom: 10),
                 child: Column(

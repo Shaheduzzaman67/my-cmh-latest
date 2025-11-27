@@ -226,21 +226,16 @@ class _PinCodeVerificationScreenState extends State<PinCodeVerificationScreen> {
                       blurRadius: 10,
                     ),
                   ],
-                  onCompleted: (v) {
-                    print("Completed");
-                  },
+                  onCompleted: (v) {},
                   // onTap: () {
                   //   print("Pressed");
                   // },
                   onChanged: (value) {
-                    print(value);
                     setState(() {
                       currentText = value;
                     });
                   },
                   beforeTextPaste: (text) {
-                    print("Allowing to paste $text");
-
                     return true;
                   },
                 ),

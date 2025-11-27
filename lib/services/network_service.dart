@@ -20,7 +20,6 @@ class NetworkService extends GetxService {
       final result = await _connectivity.checkConnectivity();
       _updateConnectionStatus(result);
     } catch (e) {
-      debugPrint('Error checking connectivity: $e');
       // If there's an error checking connectivity, assume no connection
       _updateConnectionStatus([ConnectivityResult.none]);
     }
@@ -32,7 +31,6 @@ class NetworkService extends GetxService {
         _updateConnectionStatus(result);
       },
       onError: (error) {
-        debugPrint('Connectivity stream error: $error');
         // If there's an error in the stream, assume no connection
         _updateConnectionStatus([ConnectivityResult.none]);
       },
@@ -42,7 +40,8 @@ class NetworkService extends GetxService {
   void _updateConnectionStatus(List<ConnectivityResult> results) {
     // If results list is empty or contains only 'none', assume no connection
     bool wasConnected = isConnected.value;
-    isConnected.value = results.isNotEmpty &&
+    isConnected.value =
+        results.isNotEmpty &&
         !results.every((result) => result == ConnectivityResult.none);
 
     // Only show dialog if connection status actually changed
@@ -56,10 +55,6 @@ class NetworkService extends GetxService {
     } else if (isConnected.value && !wasConnected && _isDialogShowing) {
       _dismissNoInternetDialog();
     }
-
-    // Print status for debugging
-    debugPrint(
-        'Network status updated - Connected: ${isConnected.value}, Results: $results');
   }
 
   void _showNoInternetDialog() {

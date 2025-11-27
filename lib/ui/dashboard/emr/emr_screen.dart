@@ -115,7 +115,6 @@ class _EmrScreenState extends State<EmrScreen> {
         _saving = false;
       });
       if (result != null) {
-        debugPrint(">>>>>>>>>>>>>>>>>>>>>>>>>>");
         careOfPaientInfo = result.obj!.patientInfo!;
         getPrescription(
           careOfPaientInfo.hospitalNumber.toString(),
@@ -169,19 +168,16 @@ class _EmrScreenState extends State<EmrScreen> {
           setState(() {
             _saving = false;
           });
-          print('Unsupported file type');
         }
       } else {
         setState(() {
           _saving = false;
         });
-        print('Failed to fetch file');
       }
     } catch (e) {
       setState(() {
         _saving = false;
       });
-      print('Error: $e');
     }
   }
 

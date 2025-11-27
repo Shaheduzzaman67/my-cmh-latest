@@ -51,12 +51,9 @@ class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
           'itemNo': widget.itemNo,
         }),
       );
-      print(url);
 
       if (response.statusCode == 200) {
-        print(response.statusCode);
         setState(() {
-          print(response.bodyBytes);
           pdfBytes = response.bodyBytes;
           isLoading = false;
         });

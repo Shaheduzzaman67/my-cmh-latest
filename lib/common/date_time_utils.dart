@@ -10,7 +10,6 @@ class DateTimeUtils {
       String formattedTime = DateFormat('HH:mm a').format(localDateTime);
       return formattedTime;
     } catch (e) {
-      print('Error parsing date: $e');
       return '';
     }
   }
@@ -27,7 +26,6 @@ class DateTimeUtils {
       String formattedDate = DateFormat('dd MMMM yyyy').format(localDateTime);
       return formattedDate;
     } catch (e) {
-      print('Error parsing date: $e');
       return '';
     }
   }

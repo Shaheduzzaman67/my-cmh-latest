@@ -106,13 +106,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               marginBottom: 5,
                               marginTop: 5,
                               onTextChange: (String text) {
-                                print(text);
                                 setState(() {});
                                 username = text;
                               },
-                              onDonePressed: (String value) {
-                                print(value);
-                              },
+                              onDonePressed: (String value) {},
                             ),
                             EditTextWidgetWithoutCard(
                               hintText: 'mobile_number_example'.tr,
@@ -122,13 +119,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               marginBottom: 5,
                               marginTop: 5,
                               onTextChange: (String text) {
-                                print(text);
                                 setState(() {});
                                 mobileNumber = text;
                               },
-                              onDonePressed: (String value) {
-                                print(value);
-                              },
+                              onDonePressed: (String value) {},
                             ),
                             EditTextWidgetWithoutCard(
                               hintText: 'email_example'.tr,
@@ -138,13 +132,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               marginBottom: 5,
                               marginTop: 5,
                               onTextChange: (String text) {
-                                print(text);
                                 setState(() {});
                                 email = text;
                               },
-                              onDonePressed: (String value) {
-                                print(value);
-                              },
+                              onDonePressed: (String value) {},
                             ),
                             EditTextWidgetWithoutCard(
                               hintText: 'enter_password'.tr,
@@ -154,15 +145,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               iconData: Icons.password_rounded,
                               inputType: TextInputType.text,
                               onTextChange: (String text) {
-                                print(text);
                                 setState(() {});
                                 password = text;
                               },
                               marginBottom: 5,
                               marginTop: 5,
-                              onDonePressed: (String value) {
-                                print(value);
-                              },
+                              onDonePressed: (String value) {},
                             ),
                             Container(
                               // decoration: BoxDecoration(

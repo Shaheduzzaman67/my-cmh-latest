@@ -205,7 +205,7 @@ class _ReportsScreenState extends State<ReportsScreen>
       final output = await getTemporaryDirectory();
       final file = File("${output.path}/$fileName.pdf");
       await file.writeAsBytes(bytes.buffer.asUint8List());
-      debugPrint("${output.path}/$fileName.pdf");
+
       setState(() {
         _saving = false;
       });

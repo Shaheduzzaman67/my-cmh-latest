@@ -15,7 +15,7 @@ class Session {
   getSlotData() async {
     final SharedPreferences prefs = await _prefs;
     var tk = prefs.getString(SharedPreferenceKeys.slotNo) ?? "";
-    print("🍎 slotNo from box! $tk");
+
     StringPreferenceKeys.slotNo = tk;
     return tk;
   }
@@ -24,34 +24,30 @@ class Session {
     final SharedPreferences prefs = await _prefs;
     StringPreferenceKeys.slotNo = newToken;
     prefs.setString(SharedPreferenceKeys.slotNo, newToken);
-    print("🍎saved slotNo to box! $newToken");
   }
 
   clearSlotDate() async {
     final SharedPreferences prefs = await _prefs;
     prefs.remove(SharedPreferenceKeys.slotNo);
-    print("🍎delete slotNo");
   }
 
   getUserId() async {
     final SharedPreferences prefs = await _prefs;
     var tk = prefs.getString(SharedPreferenceKeys.userId) ?? "";
-    print("🍎 userId from box! $tk");
+
     StringPreferenceKeys.userId = tk;
-    //return AppConfig.isProduction ? tk : tk;
-    return 'BD-000000';
+    return AppConfig.isProduction ? tk : tk;
+    //return 'BA-6444';
   }
 
   saveUserId(String userId) async {
     final SharedPreferences prefs = await _prefs;
     StringPreferenceKeys.userId = userId;
     prefs.setString(SharedPreferenceKeys.userId, userId);
-    print("🍎saved userId to box! $userId");
   }
 
   clearUserId() async {
     final SharedPreferences prefs = await _prefs;
     prefs.remove(SharedPreferenceKeys.userId);
-    print("🍎delete userId");
   }
 }
