@@ -37,7 +37,6 @@ class Session {
 
     StringPreferenceKeys.userId = tk;
     return AppConfig.isProduction ? tk : tk;
-    //return 'BA-6444';
   }
 
   saveUserId(String userId) async {

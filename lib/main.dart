@@ -26,8 +26,8 @@ import 'ui/dashboard/health_records_screen.dart';
 import 'localize/localization_service.dart';
 
 Future<void> main() async {
-  //initializeShurjopay(environment: "live");
-  initializeShurjopay(environment: "sandbox");
+  initializeShurjopay(environment: "live");
+  //initializeShurjopay(environment: "sandbox");
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light.copyWith(
       statusBarColor: colorAccent,
@@ -42,7 +42,7 @@ Future<void> main() async {
   _initializePaymentService();
   // Smooth Chucker is configured in each service class with SmoothChuckerDioInterceptor
   ChuckerFlutter.showOnRelease = false;
-  AppConfig.setEnvironment(Environment.development);
+  AppConfig.setEnvironment(Environment.production);
   AppConfig.printEnvironmentInfo();
   await AppInfoUtil.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -76,7 +76,8 @@ Future<void> _initializePaymentService() async {
 
   // Initialize the service
   ShurjoPayService.instance.initialize(
-    environment: PaymentEnvironment.sandbox, // Change to production when ready
+    environment:
+        PaymentEnvironment.production, // Change to production when ready
     sandboxCredentials: sandboxCredentials,
     productionCredentials: productionCredentials,
   );

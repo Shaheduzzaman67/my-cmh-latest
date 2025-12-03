@@ -1,4 +1,6 @@
 // app_config.dart
+import 'package:flutter/foundation.dart';
+
 enum Environment { development, production }
 
 class AppConfig {
@@ -34,10 +36,11 @@ class AppConfig {
   }
 
   // Enable/disable logging
-  static bool get enableLogging => !isProduction;
+  static bool get enableLogging => kReleaseMode ? !isProduction : isProduction;
 
   // Enable/disable debug features
-  static bool get enableDebugFeatures => !isProduction;
+  static bool get enableDebugFeatures =>
+      kReleaseMode ? !isProduction : isProduction;
 
   static String get deviceId {
     if (isProduction) {

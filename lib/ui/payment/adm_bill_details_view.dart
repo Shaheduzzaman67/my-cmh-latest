@@ -33,7 +33,7 @@ class _AdmBillDetailsViewState extends State<AdmBillDetailsView> {
     if (!ShurjoPayService.instance.isInitialized) {
       ShurjoPayConfig.initializeDefault(
         environment:
-            PaymentEnvironment.sandbox, // Change to production when ready
+            PaymentEnvironment.production, // Change to production when ready
       );
     }
   }
