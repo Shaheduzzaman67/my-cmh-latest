@@ -33,3 +33,5 @@ const String admAdmissionList = 'ipd-admission-list';
 const String admAdmissionSummery = 'ipd-bill-summary';
 const String opdInvoicePay = 'opd-invoice-pay';
 const String admAdmissionPay = 'ipd-invoice-pay';
+const String reportPreviewCMHLab = 'path-report-pre-view-web';
+const String emrRadiologyReport = 'emr-radiology-report';

@@ -1,39 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_cmh_updated/controller/app_controller.dart';
-import 'package:my_cmh_updated/controller/radiology_report_controller.dart';
+
+import 'package:my_cmh_updated/controller/reports_controller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class RadiologyReportViewer extends StatefulWidget {
-  final String invoiceNo;
-  final String itemNo;
-
-  const RadiologyReportViewer({
-    Key? key,
-    required this.invoiceNo,
-    required this.itemNo,
-  }) : super(key: key);
+class CmhLabReportViewer extends StatefulWidget {
+  const CmhLabReportViewer({Key? key}) : super(key: key);
 
   @override
-  State<RadiologyReportViewer> createState() => _RadiologyReportViewerState();
+  State<CmhLabReportViewer> createState() => _CmhLabReportViewerState();
 }
 
-class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
+class _CmhLabReportViewerState extends State<CmhLabReportViewer> {
   final PdfViewerController _pdfViewerController = PdfViewerController();
-  late final RadiologyReportController _controller;
+  late final ReportsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = GetControllers.shared.getRadiologyReportController();
-    _fetchReport();
-  }
-
-  void _fetchReport() {
-    _controller.fetchRadiologyReport(
-      invoiceNo: widget.invoiceNo,
-      itemNo: widget.itemNo,
-    );
+    _controller = GetControllers.shared.getReportsController();
   }
 
   @override
@@ -67,11 +53,6 @@ class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
                           _pdfViewerController.zoomLevel - 0.25;
                     },
                     tooltip: 'Zoom Out',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: _fetchReport,
-                    tooltip: 'Refresh',
                   ),
                 ],
               );
@@ -107,11 +88,6 @@ class _RadiologyReportViewerState extends State<RadiologyReportViewer> {
                     _controller.errorMessage.value,
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: Colors.red),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: _fetchReport,
-                    child: const Text('Retry'),
                   ),
                 ],
               ),

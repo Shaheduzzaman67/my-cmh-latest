@@ -3,6 +3,8 @@ import 'package:my_cmh_updated/controller/appointment_controller.dart';
 import 'package:my_cmh_updated/controller/auth_controller.dart';
 import 'package:my_cmh_updated/controller/help_desk_controller.dart';
 import 'package:my_cmh_updated/controller/pay_bill_controller.dart';
+import 'package:my_cmh_updated/controller/radiology_report_controller.dart';
+import 'package:my_cmh_updated/controller/reports_controller.dart';
 
 class GetControllers {
   static final GetControllers _singleton = GetControllers._internal();
@@ -41,5 +43,19 @@ class GetControllers {
       Get.put(PayBillController());
     }
     return Get.find<PayBillController>();
+  }
+
+  RadiologyReportController getRadiologyReportController() {
+    if (!Get.isRegistered<RadiologyReportController>()) {
+      Get.put(RadiologyReportController());
+    }
+    return Get.find<RadiologyReportController>();
+  }
+
+  ReportsController getReportsController() {
+    if (!Get.isRegistered<ReportsController>()) {
+      Get.put(ReportsController());
+    }
+    return Get.find<ReportsController>();
   }
 }
